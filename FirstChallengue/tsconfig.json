@@ -19,7 +19,10 @@
     "resolveJsonModule": true,
     "types": [
       "node"
-    ]
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
   "include": [
     "src/**/*.ts"
