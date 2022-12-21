@@ -4,11 +4,12 @@ import helmet from "helmet";
 import cors from "cors";
 import * as dotenv from 'dotenv';
 import path from "path";
+import { router } from "./routes";
 const app = express();
 //Set enviroment variables
 const NODE_ENV= process.env.NODE_ENV || 'development';
 dotenv.config({
-  path: `.env.${NODE_ENV}`
+  path: `${__dirname}/../.env.${NODE_ENV}`
 });
 
 //Settings
@@ -21,8 +22,8 @@ app.use(helmet());
 app.use(cors());
 
 //Routes
-/* app.use('/api/cursos',require('./routes/curso.routes'));
-app.use('/api/auth',require('./routes/auth.routes')); */
+app.use(router);
+
 
 //Starting Server
 app.get('/', (req, res) => {
@@ -31,5 +32,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(app.get('port'), () => {
-  console.log(`Example app listening at http://localhost:${app.get('port')}`)
+  console.log(`app listening at http://localhost:${app.get('port')}`)
 });

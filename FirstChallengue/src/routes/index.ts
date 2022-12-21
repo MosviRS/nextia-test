@@ -12,7 +12,10 @@ const cleanFileName = (fileName: string) => {
   const file = fileName.split(".").shift();
   return file;
 };
-
+/**
+ * import all the files in the folder and add them to the router
+ * 
+ */
 readdirSync(PATH_ROUTER).filter((fileName) => {
   const cleanName = cleanFileName(fileName);
   if (cleanName !== "index") {
