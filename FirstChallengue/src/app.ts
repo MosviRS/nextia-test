@@ -3,17 +3,17 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import * as dotenv from 'dotenv';
-import path from "path";
-import { router } from "./routes";
+import {router} from "./routes/auth";
+import {sequelize} from "./lib/db";
 const app = express();
 //Set enviroment variables
 const NODE_ENV= process.env.NODE_ENV || 'development';
+const PORT = process.env.PORT || 3000;
 dotenv.config({
   path: `${__dirname}/../.env.${NODE_ENV}`
 });
-
 //Settings
-app.set('port',process.env.PORT || 3000);
+app.set('port',PORT);
 
 //Middleware
 app.use(express.json());
@@ -23,14 +23,7 @@ app.use(cors());
 
 //Routes
 app.use(router);
-
-
 //Starting Server
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'../index.html'))
-}); 
-
-
-app.listen(app.get('port'), () => {
-  console.log(`app listening at http://localhost:${app.get('port')}`)
-});
+app.listen(PORT, () => console.log(`Listo por el puerto ${PORT}`));
+//Sync DB
+sequelize.sync({force: false});
