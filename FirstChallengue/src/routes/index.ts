@@ -1,28 +1,26 @@
 import { Router } from "express";
-import { readdirSync } from "fs";
-
-const PATH_ROUTER = `${__dirname}`;
+import { checkJwt } from "../middleware/checkSession";
+import { SignUp, SigIn } from "../controllers/auth";
+import {
+  getGood,
+  getGoods,
+  updateGoods,
+  postGood,
+  deleteGood,
+} from "../controllers/goods";
 const router = Router();
-
 /**
- * @param {string} fileName Name of the file
- * @returns {string} Return the name of the file without the extension
+ * Routes User
  */
-const cleanFileName = (fileName: string) => {
-  const file = fileName.split(".").shift();
-  return file;
-};
+router.post("/register", SignUp);
+router.post("/login", SigIn);
 /**
- * import all the files in the folder and add them to the router
- * 
+ * Routes Goods
  */
-readdirSync(PATH_ROUTER).filter((fileName) => {
-  const cleanName = cleanFileName(fileName);
-  if (cleanName !== "index") {
-    import(`./${cleanName}`).then((moduleRouter) => {
-      router.use(`/${cleanName}`, moduleRouter.router);
-    });
-  }
-});
+router.get("/goods/:ids", checkJwt, getGoods);
+router.get("/good/:id", checkJwt, getGood);
+router.post("/good", checkJwt, postGood);
+router.put("/good/:id", checkJwt, updateGoods);
+router.delete("/good/:id", checkJwt, deleteGood);
 
 export { router };

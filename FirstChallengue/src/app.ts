@@ -3,7 +3,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import * as dotenv from 'dotenv';
-import {router} from "./routes/auth";
+import {router} from "./routes";
 import {sequelize} from "./lib/db";
 const app = express();
 //Set enviroment variables
