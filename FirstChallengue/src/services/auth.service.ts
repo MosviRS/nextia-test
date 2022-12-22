@@ -1,5 +1,5 @@
 import { UserInterface } from "../types/UserInterface";
-import { ResponseInterface } from "../types/ResponseInterface";
+import { ResponseUserInterface } from "../types/ResponseUserInterface";
 import { User } from "../models/UserModel";
 import { encryptPassword, comparePassword } from "../utils/password";
 import { generate } from "../utils/token";
@@ -13,16 +13,16 @@ const registerNewUser = async ({ email, password, name }: UserInterface) => {
   if (!email || !password || !name)
     return {
       status: false,
-      message: "El usuario no esta definido",
+      message: "the user data is not defined",
       user: null,
-    } as ResponseInterface;
+    } as ResponseUserInterface;
   const userExist = await checkUserExist({ email: email });
   if (userExist)
     return {
       status: false,
-      message: "El usuario ya existe en la base de datos",
+      message: "the user already exists",
       user: null,
-    } as ResponseInterface;
+    } as ResponseUserInterface;
   const hashedPassword = await encryptPassword(password);
   const registerNewUser = await User.create({
     email,
@@ -31,35 +31,35 @@ const registerNewUser = async ({ email, password, name }: UserInterface) => {
   });
   return {
     status: true,
-    message: "Resgistro exitoso",
+    message: "Successfully registered user",
     user: registerNewUser,
-  } as ResponseInterface;
+  } as ResponseUserInterface;
 };
 const loginUser = async ({ email, password }: UserInterface) => {
   if (!email || !password)
     return {
       status: false,
-      message: "Datos de usuario no estan definidos",
+      message: "the user data is not defined",
       user: null,
-    } as ResponseInterface;
+    } as ResponseUserInterface;
   const user = await checkUserExist({ email: email });
   if (!user)
     return {
       status: false,
-      message: "El usuario no existe",
+      message: "the user does not exist",
       user: null,
-    } as ResponseInterface;
+    } as ResponseUserInterface;
   const checkPassword = await comparePassword(password, user.password);
   return {
     status: checkPassword,
     message: checkPassword
-      ? "Sesion iniciada correctamente"
-      : "Usuario o contraseña incorrectos",
+      ? "Successfully logged in"
+      : "Incorrect password",
     user: checkPassword ? user : null,
     token: checkPassword
       ? generate({ id: user.id, name: user.name, email: user.email })
       : null,
-  } as ResponseInterface;
+  } as ResponseUserInterface;
 };
 
 export { registerNewUser, loginUser };
