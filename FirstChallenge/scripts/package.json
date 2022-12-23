@@ -1,7 +1,7 @@
 {
-  "name": "node-project",
+  "name": "seeder",
   "version": "0.0.1",
-  "description": "node-project",
+  "description": "seeder",
   "main": "build/app.js",
   "license": "MIT",
   "files": [
@@ -9,15 +9,7 @@
   ],
   "typings": "build/index.d.ts",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./src/app.ts --extensions .ts",
-    "build": "babel src --out-dir build",
-    "watch": "tsc --watch",
-    "start": "node build/app/app.js",
-    "test": "jest",
-    "test-watch": "jest --watch",
-    "clean": "rm -rf dist",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint-fix": "tslint -c tslint.json 'src/**/*.ts' --fix"
+    "start": "npx ts-node seeder.ts"
   },
   "keywords": [],
   "author": "Diego Omalli Cruz Barajas",

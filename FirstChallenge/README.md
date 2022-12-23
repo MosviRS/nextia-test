@@ -87,3 +87,11 @@ Autenticación
 -------------
 
 Esta API requiere autenticación para añadir, modificar o eliminar articulos. Se puede realizar la autenticación mediante el envío de un token de acceso en el encabezado de la solicitud (`Authorization: Bearer <TOKEN>`). Los tokens de acceso se pueden obtener mediante el uso del endpoint `POST /login` con un usuario previamente creado con `POST /register`
+
+Para correr el script hay que ejecutar el siguiente comando:
+```sh
+npx ts-node seeder.ts
+
+```
+
+
