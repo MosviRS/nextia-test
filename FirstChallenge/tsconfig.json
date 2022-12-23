@@ -6,7 +6,7 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "build",
+    "outDir": "dist",
     "declaration": true,
     "emitDeclarationOnly": true,
     "isolatedModules": true,
