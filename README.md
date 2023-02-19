@@ -1,2 +1,1 @@
-# nextia-test
-Retos para la prueba técnica de nextia
+# Api rest con ORM seualize y postgres
