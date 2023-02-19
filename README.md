@@ -1,1 +1,1 @@
-# Api rest con ORM seualize y postgres
+# Api rest con ORM sequalize y postgres
