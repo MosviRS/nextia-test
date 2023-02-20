@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:10.16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: bienes
+    ports: 
+      - 5432:5432
+    volumes: 
+      - db:/var/lib/postgresql/data
+  app:
+    build: .
+    ports: 
+      - 3004:3004
+    depends_on: 
+      - db
+    env_file: .env.production
+    links:
+      - db
+    volumes:
+      - ./:/src
+      - /src/node_modules
+volumes:
+  db:
+    driver: local

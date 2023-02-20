@@ -9,9 +9,9 @@
   ],
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/app.ts --extensions .ts",
-    "build": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
+    "build": "babel src --out-dir build --extensions \".ts\" --source-maps inline",
     "watch": "tsc --watch",
-    "start": "node dist/app.js",
+    "start": "node build/app.js",
     "test": "jest",
     "test-watch": "jest --watch",
     "clean": "rm -rf dist",
